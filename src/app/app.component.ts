@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProjetoLivros';
+  livro=[];
+  onLivroAdicionado(livro){
+    this.livro=[...this.livro,livro] 
+  }
 }
