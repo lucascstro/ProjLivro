@@ -1,4 +1,6 @@
-import { Component, EventEmitter,Output } from '@angular/core';
+import { Component, EventEmitter,Output, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { LivrosService} from '../livros.service';
 
 @Component({
   selector: 'app-livros-inserir',
@@ -6,22 +8,20 @@ import { Component, EventEmitter,Output } from '@angular/core';
   styleUrls: ['./livros-inserir.component.css'],
 })
   export class LivrosInserirComponent {
-    @Output() livroAdicionado = new EventEmitter();
-    id: string;
-    titulo: string;
-    author: string;
-    paginas: string
+    constructor(public livroService: LivrosService){}
+    onAdicionarLivro(form: NgForm){
+      if(form.invalid){
+        return;
+      }
+      this.livroService.adicionarLivros(
+        form.value.id,
+        form.value.titulo,
+        form.value.autor,
+        form.value.paginas
+      );
+    form.resetForm();
 
-    onAdicionarLivro(){
-    const livro = {
-    id: this.id,
-    titulo: this.titulo,
-    author: this.author,
-    paginas: this.paginas,
-    };
-    this.livroAdicionado.emit(livro);
-    }    
   }
-
+  }
 
 

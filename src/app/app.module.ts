@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ClienteListaComponent } from './clientes/cliente-lista/cliente-lista.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LivrosListaComponent } from './Livros/livros-lista/livros-lista.component';
+import { LivrosService} from './Livros/livros.service';
 
 
 @NgModule({
@@ -20,7 +20,6 @@ import { LivrosListaComponent } from './Livros/livros-lista/livros-lista.compone
     AppComponent,
     LivrosInserirComponent,
     CabecalhoComponent,
-    ClienteListaComponent,
     LivrosListaComponent
   ],
   imports: [
@@ -32,7 +31,7 @@ import { LivrosListaComponent } from './Livros/livros-lista/livros-lista.compone
     MatExpansionModule
 
   ],
-  providers: [],
+  providers: [LivrosService],
   bootstrap: [AppComponent],
 
 })
