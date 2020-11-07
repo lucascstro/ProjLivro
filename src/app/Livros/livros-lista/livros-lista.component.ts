@@ -16,13 +16,13 @@ private livrosSubscription: Subscription;l
 
   constructor(public  livroService: LivrosService) { }
   ngOnInit(): void {
-    this.livros = this.livroService.getLivros();
- this.livrosSubscription = this.livroService
- .getListaDeLivrosAtualizadaObservable()
- .subscribe((livros:Livros[])=>{
-   this.livros=livros;
- })
-  }
+    this.livroService.getLivros();
+    this.livrosSubscription = this.livroService
+    .getListaDeLivrosAtualizadaObservable()
+    .subscribe((clientes: Livros[]) => {
+    this.livros = clientes;
+    });
+    }
   ngOnDestroy(): void{
     this.livrosSubscription.unsubscribe();
   }

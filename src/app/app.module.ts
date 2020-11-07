@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule} from '@angular/common/http';
 import { LivrosInserirComponent } from './Livros/livros-inserir/livros-inserir.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -28,7 +29,8 @@ import { LivrosService} from './Livros/livros.service';
     FormsModule,MatInputModule,MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule,
 
   ],
   providers: [LivrosService],
