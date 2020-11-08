@@ -1,21 +1,17 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+const mongoose = require('mongoose');
+const Livro = require('./models/livro');
 
-const livros = [{
-        id: '1',
-        nome: 'Jose',
-        fone: '11223344',
-        email: 'jose@email.com'
-    },
-    {
-        id: '2',
-        nome: 'Jaqueline',
-        fone: '22112211',
-        email: 'jaqueline@email.com'
-    }
-]
+mongoose.connect('mongodb+srv://lcastro:hudixo1525@cluster0.4sbfx.mongodb.net/app-mean?retryWrites=true&w=majority')
+    .then(() => {
+        console.log("Conexão OK")
+    }).catch(() => {
+        console.log("Conexão NOK")
+    });
+
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', "*");
@@ -24,16 +20,32 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/api/clientes', (req, res, next) => {
-    const livros = req.body;
-    console.log(livros);
+app.get('/api/livros', (req, res, next) => {
+    Livro.find().then(
+        Lista => {
+            res.status(200).json({
+                mensagem: "Tudo OK",
+                livros: Lista
+            });
+        })
+});
+
+app.post('/api/livros', (req, res, next) => {
+    const livro = new Livro({
+        id: req.body.id,
+        titulo: req.body.titulo,
+        autor: req.body.autor,
+        paginas: req.body.paginas
+    })
+    livro.save();
+    console.log(livro);
     res.status(201).json({ mensagem: 'Livro inserido' })
 });
 
-app.use('/api/Livros', (req, res, next) => {
+app.use('/api/livros', (req, res, next) => {
     res.status(200).json({
         mensagem: "Sucesso",
-        livros: livros
+        livros: Livro
     });
 });
 module.exports = app;

@@ -12,10 +12,10 @@ constructor (private httpClient: HttpClient){
 }
 
   getLivros(): void {
-    this.httpClient.get <{mensagem: string, clientes:
-    Livros[]}>('http://localhost:3000/api/clientes').subscribe(
+    this.httpClient.get <{mensagem: string, livros:
+    Livros[]}>('http://localhost:3000/api/livros').subscribe(
     (dados) => {
-    this.livros = dados.clientes;
+    this.livros = dados.livros;
     this.listaLivrosAtualizada.next([...this.livros]);
     }
     )
@@ -27,7 +27,7 @@ constructor (private httpClient: HttpClient){
     autor: autor,
     paginas: paginas,
     };
-    this.httpClient.post<{mensagem: string}> ('http://localhost:3000/api/clientes',
+    this.httpClient.post<{mensagem: string}> ('http://localhost:3000/api/livros',
     livro).subscribe(
     (dados) => {
     console.log(dados.mensagem);
